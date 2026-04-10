@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ro">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+
+    <title>Jurnalul unui adolescent de treabă</title>
+    <meta name="description" content="Un loc sigur pentru gândurile tale, prieteni noi și schimburi de idei." />
+    
+    <meta property="og:title" content="Jurnalul unui adolescent de treabă" />
+    <meta property="og:description" content="Un loc sigur pentru gândurile tale, prieteni noi și schimburi de idei." />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="/assets/hero-banner.png" />
+    
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Jurnalul unui adolescent de treabă" />
+    <meta name="twitter:description" content="Un spațiu pentru liceeni: viață, hobby-uri, sfaturi și discuții pe bune." />
+    <meta name="twitter:image" content="/assets/hero-banner.png" />
+
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Suppress ALL Google Translate UI — banner, tooltip, spinner -->
+    <style>
+      .goog-te-banner-frame,
+      .goog-te-banner-frame *,
+      #goog-gt-tt,
+      #goog-gt-,
+      .goog-te-balloon-frame,
+      .goog-tooltip,
+      .goog-tooltip:hover,
+      .goog-te-spinner-pos,
+      .goog-te-gadget,
+      .skiptranslate,
+      .goog-te-menu-frame { display: none !important; visibility: hidden !important; }
+      body { top: 0 !important; position: static !important; }
+      iframe.goog-te-banner-frame { display: none !important; }
+    </style>
+  </head>
+  <body>
+    <!-- Hidden Google Translate element -->
+    <div id="google_translate_element" style="display:none;visibility:hidden;position:absolute;top:-9999px;left:-9999px;pointer-events:none;"></div>
+
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+
+    <!-- Google Translate Widget -->
+    <script>
+      function googleTranslateElementInit() {
+        new google.translate.TranslateElement({
+          pageLanguage: 'ro',
+          autoDisplay: false
+        }, 'google_translate_element');
+
+        // After init, suppress any UI that appeared
+        suppressGTUI();
+      }
+
+      // Remove all Google Translate visual elements from the DOM
+      function suppressGTUI() {
+        // Remove banner iframes
+        document.querySelectorAll('iframe.goog-te-banner-frame, iframe[name="googleTranslateFrame"]').forEach(function(el) {
+          el.style.display = 'none';
+          el.style.visibility = 'hidden';
+        });
+        // Remove tooltip div
+        var tt = document.getElementById('goog-gt-tt');
+        if (tt) tt.style.display = 'none';
+        // Reset body shift that GT adds
+        if (document.body) {
+          document.body.style.top = '0px';
+          document.body.style.position = '';
+          document.body.style.removeProperty('top');
+        }
+      }
+
+      // MutationObserver: runs suppressGTUI every time GT injects something into <body>
+      var _gtObs = new MutationObserver(function() { suppressGTUI(); });
+
+      document.addEventListener('DOMContentLoaded', function() {
+        _gtObs.observe(document.body, { childList: true });
+        suppressGTUI();
+      });
+
+      // Belt-and-suspenders: also run on interval for the first 10s
+      var _gtCleanupCount = 0;
+      var _gtCleanupTimer = setInterval(function() {
+        suppressGTUI();
+        _gtCleanupCount++;
+        if (_gtCleanupCount > 30) clearInterval(_gtCleanupTimer);
+      }, 300);
+    </script>
+    <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" async></script>
+  </body>
+</html>

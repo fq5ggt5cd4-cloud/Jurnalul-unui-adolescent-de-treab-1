@@ -1,0 +1,56 @@
+Actualizează aplicația pentru a implementa un sistem complet de roluri (Role-Based Access Control) și funcționalitate de ștergere cont, production-ready.
+
+1) Sistem de roluri:
+- Adaugă în tabelul users un câmp nou numit "role" (enum sau string).
+- Valorile posibile: "admin" și "user".
+- Rolul implicit pentru conturile noi trebuie să fie "user".
+- Nu crea utilizatori admin demo.
+
+2) Configurare administrator:
+- Permite promovarea manuală a unui utilizator la rolul "admin" prin actualizare în baza de date.
+- Sistemul trebuie să suporte existența unuia sau mai multor administratori.
+- Nu face atribuirea automată a rolului admin fără configurare explicită.
+
+3) Restricționarea publicării articolelor:
+- Doar utilizatorii cu role="admin" pot crea, edita sau șterge articole.
+- Dacă un utilizator non-admin încearcă să acceseze ruta de creare articol, returnează 403 Forbidden cu un mesaj clar și inteligibil pentru utilizator.
+- Ascunde butonul "Scrie un articol" pentru utilizatorii care nu sunt admin (dar verificarea trebuie făcută obligatoriu în backend).
+- Protejează rutele articolelor cu middleware dedicat pentru verificarea rolului admin.
+
+4) Middleware și securitate:
+- Middleware pentru verificare autentificare.
+- Middleware pentru verificare rol admin.
+- Toate verificările de permisiuni trebuie făcute în backend, nu doar în frontend.
+- Implementare curată, sigură și scalabilă.
+
+5) Pagini de profil utilizator:
+- Creează rută dinamică de tip /profile/:username
+- Fiecare utilizator trebuie să aibă o pagină publică de profil care să afișeze:
+  - Username
+  - Data înregistrării
+  - Rolul (admin sau user)
+  - Activitate pe forum
+  - Articole publicate (doar dacă este admin)
+- Utilizatorul autentificat trebuie să aibă acces la un dashboard propriu cu informații suplimentare.
+
+6) Funcționalitate ștergere cont:
+- Permite utilizatorilor autentificați să își șteargă permanent contul.
+- Adaugă opțiunea "Șterge contul" în pagina de profil sau setări.
+- Cere confirmarea parolei înainte de ștergere.
+- Afișează un mesaj clar de avertizare că acțiunea este ireversibilă.
+- După confirmare, șterge:
+  - Contul utilizatorului
+  - Sesiunile și tokenurile asociate
+- Definește comportamentul pentru conținutul generat de utilizator:
+  - Fie șterge complet conținutul
+  - Fie anonimizează autorul (ex: "Utilizator șters")
+
+7) Protecție suplimentară pentru admin:
+- Dacă utilizatorul care dorește ștergerea are role="admin", nu permite ștergerea dacă este singurul administrator.
+- Cere transferarea rolului către alt utilizator înainte de ștergere.
+
+8) Cerințe generale:
+- Mesaje clare, prietenoase, fără răspunsuri brute de tip JSON.
+- Fără date demo.
+- Implementare production-ready.
+- Arhitectură curată și extensibilă.

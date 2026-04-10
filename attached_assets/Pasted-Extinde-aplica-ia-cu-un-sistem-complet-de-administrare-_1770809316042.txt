@@ -1,0 +1,65 @@
+Extinde aplicația cu un sistem complet de administrare avansată, moderare, loguri și conformitate GDPR, production-ready.
+
+1) Admin Dashboard (accesibil doar role="admin"):
+- Creează o rută /admin protejată cu middleware de admin.
+- Dashboard-ul trebuie să includă:
+  - Statistici generale (număr utilizatori, articole, comentarii, activitate recentă)
+  - Listă utilizatori cu filtrare și căutare
+  - Posibilitate promovare la admin
+  - Posibilitate retrogradare la user
+  - Blocare / deblocare utilizator
+  - Ștergere utilizator
+  - Listă articole și comentarii pentru moderare
+  - Secțiune conținut raportat
+
+2) Moderare conținut:
+- Sistem de raportare pentru articole, comentarii și postări forum.
+- Admin poate:
+  - Șterge conținut
+  - Ascunde temporar
+  - Marca drept rezolvat
+- Filtrare automată de bază pentru spam și limbaj ofensator.
+- Notificare admin pentru conținut raportat.
+
+3) Sistem de blocare utilizatori:
+- Adaugă câmpuri în users:
+  - isBlocked (boolean)
+  - blockedUntil (date, opțional)
+  - blockReason (string)
+- Dacă utilizatorul este blocat:
+  - Nu poate posta
+  - Nu poate comenta
+  - Nu se poate autentifica (în caz de blocare totală)
+- Verificare făcută în backend la fiecare request protejat.
+
+4) Loguri de activitate:
+- Creează tabel activity_logs:
+  - id
+  - userId
+  - action
+  - details
+  - createdAt
+- Înregistrează:
+  - Login
+  - Logout
+  - Creare / ștergere articol
+  - Blocare utilizator
+  - Promovare admin
+- Admin poate vedea logurile în dashboard.
+
+5) Conformitate GDPR:
+- Posibilitate export date utilizator (format JSON).
+- Posibilitate ștergere completă date (Right to be forgotten).
+- Stocare clară a datei acceptării Terms.
+- Politică clară privind retenția datelor.
+- Endpoint pentru export date proprii.
+- Implementare securizată și production-ready.
+
+6) Securitate:
+- Toate verificările făcute în backend.
+- Middleware pentru autentificare și verificare admin.
+- Fără date demo.
+- Arhitectură curată și scalabilă.   
+
+
+Apropo, dacă nu ești autentificat pe site, să nu apară NICI ATUNCI opțiunea de a scrie un articol
